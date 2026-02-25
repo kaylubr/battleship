@@ -1,0 +1,1 @@
+npm install webpack webpack-cli html-webpack-plugin css-loader style-loader html-loader webpack-dev-server webpack-merge
