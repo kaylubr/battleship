@@ -4,8 +4,47 @@ class Gameboard {
 
   constructor() {
     this.board = Array.from({ length: this.ROWS }, () => 
-      new Array(this.COLUMN).fill({ ship: null, isHit: false })
+      Array.from({ length: this.COLUMN }, () => ({ ship: null, isHit: false }))
     );
+  }
+
+  placeShip(ship, row, column, axis) {
+    if (!this.checkIfNoConflict(ship, row, column, axis)) {
+      return false;
+    }
+
+    for (let i = 0; i < ship.length; i++) {
+      if (axis === 'HORIZONTAL')
+        this.board[row][column + i].ship = ship;
+      else if (axis === 'VERTICAL')
+        this.board[row + i][column].ship = ship;
+    }
+
+    return true
+  }
+
+  checkIfNoConflict(ship, row, column, axis) {
+    switch (axis) {
+      case 'HORIZONTAL':
+        const horizontalConflict = this.board[row].slice(column, ship.length);
+
+        for (let i = 0; i < horizontalConflict.length; i++) {
+          if (horizontalConflict[i].ship !== null)
+            return false;
+        }
+
+        break;
+      case 'VERTICAL':
+        const verticalConflict = this.board.map(row => row[0])
+
+        for (let i = 0; i < verticalConflict.length; i++) {
+          if (verticalConflict[i].ship !== null)
+            return false;
+        }
+        break;
+    }
+
+    return true;
   }
 }
 
