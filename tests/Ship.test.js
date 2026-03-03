@@ -12,4 +12,12 @@ describe('when Ship is created', () => {
 
     expect(ship.hitCount).toBe(1);
   });
+
+  test('isSunk returns true if hitCount greater or equal than its length', () => {
+    const ship = new Ship(3);
+    for (let i = 0; i < 3; i++)
+      ship.hit();
+
+    expect(ship.isSunk()).toBe(true);
+  });
 });

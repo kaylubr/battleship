@@ -7,6 +7,10 @@ class Ship {
   hit() {
     this.hitCount += 1
   }
+
+  isSunk() {
+    return this.hitCount >= this.length;
+  }
 }
 
 export default Ship;
