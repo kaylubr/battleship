@@ -5,9 +5,9 @@ class Gameboard {
   COLUMN = 10;
 
   constructor() {
-    this.board = Array.from({ length: this.ROWS }, () => 
-      Array.from({ length: this.COLUMN }, () => new Cell())
-    );
+    this.board = Array.from({ length: this.ROWS }, 
+      () => Array.from({ length: this.COLUMN }, () => new Cell()));
+    this.ships = [];
   }
 
   placeShip(ship, row, column, axis) {
@@ -22,6 +22,8 @@ class Gameboard {
         this.board[row + i][column].ship = ship;
     }
 
+    this.ships.push(ship);
+
     return true
   }
 
@@ -30,8 +32,13 @@ class Gameboard {
 
     if (cell.ship !== null && cell.isHit === false)
       cell.ship.hit();
-
+    
     cell.isHit = true;
+    
+    if (this.#checkIfAllShipsAreSunk())
+      return true;
+
+    return false;
   }
 
   checkIfNoConflict(ship, row, column, axis) {
@@ -53,6 +60,17 @@ class Gameboard {
             return false;
         }
         break;
+    }
+
+    return true;
+  }
+
+  #checkIfAllShipsAreSunk() {
+    const allShips = this.ships;
+    
+    for (const ship of allShips) {
+      if (!ship.isSunk())
+        return false; 
     }
 
     return true;

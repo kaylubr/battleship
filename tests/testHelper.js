@@ -9,8 +9,3 @@ export function checkBoardSize(board) {
 
   return correctSize;
 };
-
-export function clearBoard(board) {
-  for (let i = 0; i < board.length; i++)
-    board[i] = Array.from({ length: 10 }, () => ({ ship: null, isHit: false }))
-}

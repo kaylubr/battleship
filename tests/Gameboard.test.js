@@ -1,10 +1,14 @@
 import { test, expect, describe, beforeEach } from '@jest/globals';
 import Gameboard from '../src/models/Gameboard';
 import Ship from '../src/models/Ship';
-import { checkBoardSize, clearBoard } from './testHelper';
+import { checkBoardSize } from './testHelper';
 
 describe('when Gameboard is created', () => {
-  const gameboard = new Gameboard();
+  let gameboard;
+
+  beforeEach(() => {
+    gameboard = new Gameboard();
+  });
 
   test('board should have the correct size', () => {
     const isBoardSizeCorrect = checkBoardSize(gameboard.board);
@@ -58,7 +62,25 @@ describe('when Gameboard is created', () => {
     expect(gameboard.board[0][0].ship.hitCount).toBe(1);
   });
 
-  afterEach(() => {
-    clearBoard(gameboard.board);
+  test('receiveAttack returns true if all ships are sunk after it hits a ship', () => {
+    console.log(gameboard.board[0])
+    
+    const ship1 = new Ship(1);
+    const ship2 = new Ship(2);
+    const ship3 = new Ship(3);
+
+    gameboard.placeShip(ship1, 0, 0, 'HORIZONTAL');
+    gameboard.receiveAttack(0, 0);
+
+    gameboard.placeShip(ship2, 1, 0, 'HORIZONTAL');
+    gameboard.receiveAttack(1, 0);
+    gameboard.receiveAttack(1, 1);
+
+    gameboard.placeShip(ship3, 2, 0, 'HORIZONTAL');
+    gameboard.receiveAttack(2, 0);
+    gameboard.receiveAttack(2, 1);
+    const allShipSunk = gameboard.receiveAttack(2, 2);
+
+    expect(allShipSunk).toBe(true);
   });
 });
