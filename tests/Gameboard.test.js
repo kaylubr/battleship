@@ -49,6 +49,15 @@ describe('when Gameboard is created', () => {
     expect(gameboard.board[0 + (anotherShip.length - 1)][0].ship).toBeNull();
   });
 
+  test('receiveAttack will use the hit method of the ship inside the cell', () => {
+    const ship = new Ship(3);
+    gameboard.placeShip(ship, 0, 0, 'HORIZONTAL');
+    gameboard.receiveAttack(0, 0);
+
+    expect(gameboard.board[0][0].isHit).toBe(true);
+    expect(gameboard.board[0][0].ship.hitCount).toBe(1);
+  });
+
   afterEach(() => {
     clearBoard(gameboard.board);
   });

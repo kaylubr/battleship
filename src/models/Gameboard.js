@@ -23,6 +23,15 @@ class Gameboard {
     return true
   }
 
+  receiveAttack(row, column) {
+    const cell = this.board[row][column];
+
+    if (cell.ship !== null && cell.isHit === false)
+      cell.ship.hit();
+
+    cell.isHit = true;
+  }
+
   checkIfNoConflict(ship, row, column, axis) {
     switch (axis) {
       case 'HORIZONTAL':
