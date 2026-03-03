@@ -1,10 +1,12 @@
+import Cell from "./Cell";
+
 class Gameboard {
   ROWS = 10;
   COLUMN = 10;
 
   constructor() {
     this.board = Array.from({ length: this.ROWS }, () => 
-      Array.from({ length: this.COLUMN }, () => ({ ship: null, isHit: false }))
+      Array.from({ length: this.COLUMN }, () => new Cell())
     );
   }
 

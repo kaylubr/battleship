@@ -1,7 +1,7 @@
 import { test, expect, describe, beforeEach } from '@jest/globals';
 import Gameboard from '../src/models/Gameboard';
 import Ship from '../src/models/Ship';
-import { checkBoardSize, clearBoard } from './testHelper.js';
+import { checkBoardSize, clearBoard } from './testHelper';
 
 describe('when Gameboard is created', () => {
   const gameboard = new Gameboard();
