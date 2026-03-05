@@ -11,7 +11,7 @@ class Gameboard {
   }
 
   placeShip(ship, row, column, axis) {
-    if (!this.checkIfNoConflict(ship, row, column, axis)) {
+    if (!this.#checkIfNoConflict(ship, row, column, axis)) {
       return false;
     }
 
@@ -41,7 +41,10 @@ class Gameboard {
     return false;
   }
 
-  checkIfNoConflict(ship, row, column, axis) {
+  #checkIfNoConflict(ship, row, column, axis) {
+    if (axis === 'HORIZONTAL' && column + ship.length > this.COLUMN) return false;
+    if (axis === 'VERTICAL' && row + ship.length > this.ROWS) return false;
+
     switch (axis) {
       case 'HORIZONTAL':
         const horizontalConflict = this.board[row].slice(column, column + ship.length);        
