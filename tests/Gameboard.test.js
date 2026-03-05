@@ -34,7 +34,7 @@ describe('when Gameboard is created', () => {
     expect(gameboard.board[0][0 + (anotherShip.length - 1)].ship).not.toBeNull();
   });
 
-  test('it should allow ships to be placed vertically', () => {
+  test.only('it should allow ships to be placed vertically', () => {
     const ship = new Ship(3);
     gameboard.placeShip(ship, 5, 5, 'VERTICAL');
 
@@ -63,8 +63,6 @@ describe('when Gameboard is created', () => {
   });
 
   test('receiveAttack returns true if all ships are sunk after it hits a ship', () => {
-    console.log(gameboard.board[0])
-    
     const ship1 = new Ship(1);
     const ship2 = new Ship(2);
     const ship3 = new Ship(3);

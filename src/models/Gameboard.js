@@ -44,8 +44,7 @@ class Gameboard {
   checkIfNoConflict(ship, row, column, axis) {
     switch (axis) {
       case 'HORIZONTAL':
-        const horizontalConflict = this.board[row].slice(column, ship.length);
-
+        const horizontalConflict = this.board[row].slice(column, column + ship.length);        
         for (let i = 0; i < horizontalConflict.length; i++) {
           if (horizontalConflict[i].ship !== null)
             return false;
@@ -53,10 +52,8 @@ class Gameboard {
 
         break;
       case 'VERTICAL':
-        const verticalConflict = this.board.map(row => row[0])
-
-        for (let i = 0; i < verticalConflict.length; i++) {
-          if (verticalConflict[i].ship !== null)
+        for (let i = 0; i < ship.length; i++) {
+          if (this.board[row + i][column].ship !== null)
             return false;
         }
         break;
