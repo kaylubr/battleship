@@ -32,9 +32,17 @@ body {
 }
 
 header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   font-family: "Plus Jakarta-sans Medium";
   padding: 1rem var(--side-gap);
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+header img {
+  width: 3vw;
+  cursor: pointer;
 }
 
 main {
