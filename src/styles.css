@@ -11,15 +11,26 @@
 }
 
 @font-face {
-  font-family: "Plus Jakarta-Sans";
+  font-family: "Plus Jakarta-sans Regular";
   src: url('./fonts/PlusJakartaSans-Regular.ttf');
 }
 
+@font-face {
+  font-family: "Plus Jakarta-sans Medium";
+  src: url('./fonts/PlusJakartaSans-Medium.ttf');
+}
+
+@font-face {
+  font-family: "Plus Jakarta-sans SemiBold";
+  src: url('./fonts/PlusJakartaSans-SemiBold.ttf');
+}
+
 body {
-  font-family: "Plus Jakarta-Sans";
+  font-family: "Plus Jakarta-sans Regular";
 }
 
 header {
+  font-family: "Plus Jakarta-sans Medium";
   padding: 1rem var(--side-gap);
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
@@ -28,16 +39,19 @@ main {
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  margin: 5vh var(--side-gap);
+  align-items: center;
 }
 
 .board-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap-reverse;
   gap: 5rem;
+  margin: 5vh 1.3rem;
 }
 
 .board-container h2 {
+  font-family: "Plus Jakarta-sans Medium";
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -65,7 +79,7 @@ main {
   padding: 0.5rem 1.5rem;
   font-size: 1.2rem;
   cursor: pointer;
-  font-family: "Plus Jakarta-Sans";
+  font-family: "Plus Jakarta-sans Semibold";
   font-weight: 700;
   background-color: #fff;
   border: solid 1px black;
