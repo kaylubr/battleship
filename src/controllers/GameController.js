@@ -83,7 +83,7 @@ class GameController {
       computerCell.dataset.hit = 'miss'
     }
 
-    this.#checkWinner(currentBoard, 'All ships sunk. The seas are yours.');
+    this.#checkWinner(currentBoard, 'All enemy ships are sunk. The seas are yours.');
 
     this.#currentPlayer = this.player;
     currentBoard = this.#currentPlayer.gameboard;
@@ -139,6 +139,9 @@ class GameController {
       const success = currentBoard.placeShip(this.#currentShip, currentRow, currentColumn, this.#axis);
       if (!success) {
         status.textContent = 'Cell already occupied. / Out of bounds.';
+        setTimeout(() => {
+          this.#printStatusForPlacingShips();
+        }, 2000);
         return;
       }
 
@@ -162,9 +165,8 @@ class GameController {
     } else {
       status.textContent = 'Invalid Placement.'
       setTimeout(() => {
-        status.textContent = '';
         this.#printStatusForPlacingShips();
-      }, 3000);
+      }, 2000);
     }
   }
 
@@ -285,7 +287,7 @@ class GameController {
         status.textContent = 'Deploying: Carrier (5) — Shift to rotate';
         break;
       default:
-        status.textContent = 'All ships deployed — Ready for battle!';
+        status.textContent = 'All ships deployed — Launch your attack!';
     }
   }
 }
