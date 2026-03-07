@@ -30,13 +30,14 @@ class GameBoard {
   receiveAttack(row, column) {
     const cell = this.board[row][column];
 
-    if (cell.ship !== null && cell.isHit === false)
-      cell.ship.hit();
-    
+    if (cell.isHit) return;
+
     cell.isHit = true;
-    
-    if (this.#checkIfAllShipsAreSunk())
+
+    if (cell.ship !== null) {
+      cell.ship.hit();
       return true;
+    }
 
     return false;
   }
@@ -65,7 +66,7 @@ class GameBoard {
     return true;
   }
 
-  #checkIfAllShipsAreSunk() {
+  checkIfAllShipsAreSunk() {
     const allShips = this.ships;
     
     for (const ship of allShips) {

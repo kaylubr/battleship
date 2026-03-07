@@ -7,6 +7,8 @@
 }
 
 :root {
+  --empty-cell-hit-color: red;
+  ---cell-with-ship-hit-color: rgb(165, 92, 92);
   --side-gap: 25vw;
 }
 
@@ -62,6 +64,10 @@ main {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   border: solid 1px black;
+}
+
+.board-right .cell:hover {
+  background-color: #dbdbdb;
 }
 
 .cell {
