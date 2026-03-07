@@ -103,21 +103,23 @@ class GameController {
 
   #handleCellHover({ target }) {
     const board = target.dataset.board;
-    if (this.#gameStarted && board === 'board-left' && this.#playerShips.length > 0) {
-      const shipLength = this.#currentShip.length;
-      const currentRow = Number(target.dataset.row);
-      const currentColumn = Number(target.dataset.column);
-      
-      if (this.#axis === 'HORIZONTAL' && currentColumn + shipLength < 10) {
-        for (let i = currentColumn; i <= (currentColumn + shipLength) - 1; i++) {
-          const cell = document.querySelector(`[data-row="${currentRow}"][data-column="${i}"]`);
-          cell.style.backgroundColor = 'gray';
-        }
-      } else if (this.#axis === "VERTICAL" && currentRow + shipLength < 10) {
-        for (let i = currentRow; i <= (currentRow + shipLength) - 1; i++) {
-          const cell = document.querySelector(`[data-row="${i}"][data-column="${currentColumn}"]`);
-          cell.style.backgroundColor = 'gray';
-        }
+
+    if (!(this.#gameStarted && board === 'board-left' && this.#playerShips.length > 0))
+      return false;
+
+    const shipLength = this.#currentShip.length;
+    const currentRow = Number(target.dataset.row);
+    const currentColumn = Number(target.dataset.column);
+    
+    if (this.#axis === 'HORIZONTAL' && currentColumn + shipLength < 10) {
+      for (let i = currentColumn; i <= (currentColumn + shipLength) - 1; i++) {
+        const cell = document.querySelector(`[data-row="${currentRow}"][data-column="${i}"]`);
+        cell.style.backgroundColor = 'gray';
+      }
+    } else if (this.#axis === "VERTICAL" && currentRow + shipLength < 10) {
+      for (let i = currentRow; i <= (currentRow + shipLength) - 1; i++) {
+        const cell = document.querySelector(`[data-row="${i}"][data-column="${currentColumn}"]`);
+        cell.style.backgroundColor = 'gray';
       }
     }
   }
