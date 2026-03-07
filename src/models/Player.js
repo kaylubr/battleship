@@ -1,9 +1,9 @@
-import Gameboard from './Gameboard';
+import GameBoard from './GameBoard.js';
 
 class Player {
   constructor(type) {
     this.type = type;
-    this.gameboard = new Gameboard();
+    this.gameboard = new GameBoard();
   }
 }
 

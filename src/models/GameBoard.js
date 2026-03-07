@@ -1,6 +1,6 @@
-import Cell from "./Cell";
+import Cell from "./Cell.js";
 
-class Gameboard {
+class GameBoard {
   ROWS = 10;
   COLUMN = 10;
 
@@ -77,4 +77,4 @@ class Gameboard {
   }
 }
 
-export default Gameboard;
+export default GameBoard;
