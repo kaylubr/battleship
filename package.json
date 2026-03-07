@@ -12,7 +12,6 @@
   },
   "license": "ISC",
   "author": "kaylubr",
-  "type": "commonjs",
   "main": "webpack.common.js",
   "directories": {
     "test": "tests"
