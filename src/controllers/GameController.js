@@ -129,7 +129,8 @@ class GameController {
     const attackingPhase = this.#gameStarted && this.#remainingPlayerShips.length < 1;
 
     if (placingShipPhase && isRightBoard) return;
-    
+    if (attackingPhase && isLeftBoard) return;
+
     if (attackingPhase && isRightBoard) {
       this.#attackBoard(currentRow, currentColumn);
       return;
