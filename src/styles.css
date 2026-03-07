@@ -63,13 +63,13 @@ main {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  border: solid 1px black;
 }
 
 .cell {
-  border: solid 1px black;
+  outline: solid 1px black;
   padding: 1rem;
   cursor: pointer;
+  background-color: #fff;
 }
 
 .button-container {
