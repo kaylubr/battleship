@@ -108,8 +108,6 @@ class GameController {
         playerCell.dataset.hit = 'miss'
       }
 
-      console.log(playerCell);
-    
       emptyCell = true;
     }
 
