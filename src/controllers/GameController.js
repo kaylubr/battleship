@@ -26,8 +26,7 @@ class GameController {
     this.#renderBoard(leftBoard);
     this.#renderBoard(rightBoard);
     this.#initializeShips();
-
-    console.log(this.#currentShip);
+    this.#printStatusForPlacingShips();
     
     startButton.addEventListener('click', this.#handleStartButton.bind(this));
     document.addEventListener('keyup', this.#toggleAxis.bind(this));
@@ -93,10 +92,12 @@ class GameController {
 
       this.#playerShips.shift();
       this.#currentShip = this.#playerShips[0];
+      this.#printStatusForPlacingShips();
     } else {
       status.textContent = 'Invalid Placement.'
       setInterval(() => {
         status.textContent = '';
+        this.#printStatusForPlacingShips();
       }, 3000);
     }
   }
@@ -154,6 +155,31 @@ class GameController {
   #toggleAxis({ key }) {
     if (key === 'Shift')
       this.#axis = this.#axis === 'HORIZONTAL' ? 'VERTICAL' : 'HORIZONTAL';
+  }
+
+  #printStatusForPlacingShips() {
+    const status = document.querySelector('#status');
+    const shipsLength = this.#playerShips.length;  
+    
+    switch (shipsLength) {
+      case 5:
+        status.innerHTML = 'Deploying: Carrier (5) — Shift to rotate';
+        break;
+      case 4:
+        status.innerHTML = 'Deploying: Battleship (4) — Shift to rotate';
+        break;
+      case 3:
+        status.innerHTML = 'Deploying: Cruiser (3) — Shift to rotate';
+        break;
+      case 2:
+        status.innerHTML = 'Deploying: Submarine (3) — Shift to rotate';
+        break;
+      case 1:
+        status.innerHTML = 'Deploying: Destroyer (2) — Shift to rotate';
+        break;
+      default:
+        status.textContent = '';
+    }
   }
 }
 
