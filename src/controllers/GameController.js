@@ -67,11 +67,16 @@ class GameController {
 
   #handleCellClick({ target }) {
     const board = target.dataset.board;
-    if (this.#gameStarted && board === 'board-left' && this.#playerShips.length > 0) {
-      const shipLength = this.#currentShip.length;
-      const currentRow = Number(target.dataset.row);
-      const currentColumn = Number(target.dataset.column);
-      
+    const status = document.querySelector('#status');
+
+    if (!(this.#gameStarted && board === 'board-left' && this.#playerShips.length > 0))
+      return;
+
+    const shipLength = this.#currentShip.length;
+    const currentRow = Number(target.dataset.row);
+    const currentColumn = Number(target.dataset.column);
+    
+    if (this.#currentPlayer.gameboard.placeShip(this.#currentShip, currentRow, currentColumn, this.#axis)) {
       if (this.#axis === 'HORIZONTAL' && currentColumn + shipLength < 10) {
         for (let i = currentColumn; i <= (currentColumn + shipLength) - 1; i++) {
           const cell = document.querySelector(`[data-row="${currentRow}"][data-column="${i}"]`);
@@ -86,9 +91,13 @@ class GameController {
         }
       }
 
-      this.#currentPlayer.gameboard.placeShip(this.#currentShip, currentRow, currentColumn, this.#axis);
       this.#playerShips.shift();
       this.#currentShip = this.#playerShips[0];
+    } else {
+      status.textContent = 'Invalid Placement.'
+      setInterval(() => {
+        status.textContent = '';
+      }, 3000);
     }
   }
 
