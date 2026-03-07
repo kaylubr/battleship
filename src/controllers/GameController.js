@@ -51,18 +51,50 @@ class GameController {
         cell.dataset.row = i;
         cell.dataset.column = j;
         cell.dataset.board = board.className;
+        cell.dataset.occupied = 'false';
         cell.classList.add('cell');
 
-        cell.addEventListener('mouseover', this.#handleCellHover.bind(this));
-        cell.addEventListener('mouseout', this.#handleCellOut.bind(this));
+        if (board.className === 'board-left') {
+          cell.addEventListener('mouseover', this.#handleCellHover.bind(this));
+          cell.addEventListener('mouseout', this.#handleCellOut.bind(this));
+          cell.addEventListener('click', this.#handleCellClick.bind(this));
+        }
 
         board.append(cell);
       }
     }
   }
 
+  #handleCellClick({ target }) {
+    const board = target.dataset.board;
+    if (this.#gameStarted && board === 'board-left' && this.#playerShips.length > 0) {
+      const shipLength = this.#currentShip.length;
+      const currentRow = Number(target.dataset.row);
+      const currentColumn = Number(target.dataset.column);
+      
+      if (this.#axis === 'HORIZONTAL' && currentColumn + shipLength < 10) {
+        for (let i = currentColumn; i <= (currentColumn + shipLength) - 1; i++) {
+          const cell = document.querySelector(`[data-row="${currentRow}"][data-column="${i}"]`);
+          cell.dataset.occupied = 'true';
+          cell.style.backgroundColor = 'gray';
+        }
+      } else if (this.#axis === "VERTICAL" && currentRow + shipLength < 10) {
+        for (let i = currentRow; i <= (currentRow + shipLength) - 1; i++) {
+          const cell = document.querySelector(`[data-row="${i}"][data-column="${currentColumn}"]`);
+          cell.dataset.occupied = 'true';
+          cell.style.backgroundColor = 'gray';
+        }
+      }
+
+      this.#currentPlayer.gameboard.placeShip(this.#currentShip, currentRow, currentColumn, this.#axis);
+      this.#playerShips.shift();
+      this.#currentShip = this.#playerShips[0];
+    }
+  }
+
   #handleCellHover({ target }) {
-    if (this.#gameStarted && target.dataset.board === 'board-left') {
+    const board = target.dataset.board;
+    if (this.#gameStarted && board === 'board-left' && this.#playerShips.length > 0) {
       const shipLength = this.#currentShip.length;
       const currentRow = Number(target.dataset.row);
       const currentColumn = Number(target.dataset.column);
@@ -83,7 +115,10 @@ class GameController {
 
   #handleCellOut() {
     const allCells = document.querySelectorAll('.board-left .cell');
-    allCells.forEach(cell => cell.style.backgroundColor = '#fff');
+    allCells.forEach(cell => {
+      if (cell.dataset.occupied === 'false')
+        cell.style.backgroundColor = '#fff';
+    });
   }
 
   #initializeShips() {
