@@ -69,6 +69,7 @@ class GameController {
 
   #attackBoard(rowToAttack, colToAttack) {
     const computerCell = document.querySelector(`.board-right [data-row="${rowToAttack}"][data-column="${colToAttack}"]`);
+    if (computerCell.dataset.hit) return;
 
     this.#currentPlayer = this.computer;
     let currentBoard = this.#currentPlayer.gameboard;
@@ -241,15 +242,17 @@ class GameController {
       new Ships(2), 
     ];
 
-    this.#currentShip = this.#remainingPlayerShips[0];
+    this.#currentShip = this.#remainingPlayerShips[0] ;
   }
 
   #checkWinner(board, message) {
     const status = document.querySelector('#status');
     if (board.checkIfAllShipsAreSunk()) {
+      const retryButton = document.querySelector('#retry-link-button');
       const leftBoard = document.querySelector('.board-left');
       const rightBoard = document.querySelector('.board-right');
 
+      retryButton.style.display = 'inline';
       leftBoard.classList.toggle('blur');
       rightBoard.classList.toggle('blur');
 

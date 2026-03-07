@@ -66,10 +66,6 @@ main {
   border: solid 1px black;
 }
 
-.board-right .cell:hover {
-  background-color: #dbdbdb;
-}
-
 .cell {
   border: solid 1px black;
   padding: 1rem;
@@ -107,11 +103,22 @@ main {
 }
 
 #status {
-  padding: 1rem;
-  font-size: 1.2rem;
+  padding: 1rem 4px 1rem 1rem;
+  font-size: 1.1rem;
 }
 
 .blur {
   filter: blur(8px);
   -webkit-filter: blur(8px);
+}
+
+#retry-link-button {
+  font-size: 1rem;
+  padding: 1rem 1rem 1rem 0;
+  line-height: 1.5;
+  display: none;
+}
+
+#retry-link-button:visited {
+  color: blue;
 }
