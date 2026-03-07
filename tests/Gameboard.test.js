@@ -1,13 +1,13 @@
 import { test, expect, describe, beforeEach } from '@jest/globals';
-import Gameboard from '../src/models/Gameboard';
-import Ship from '../src/models/Ship';
-import { checkBoardSize } from './testHelper';
+import GameBoard from '../src/models/GameBoard.js';
+import Ship from '../src/models/Ship.js';
+import { checkBoardSize } from './testHelper.js';
 
-describe('when Gameboard is created', () => {
+describe('when GameBoard is created', () => {
   let gameboard;
 
   beforeEach(() => {
-    gameboard = new Gameboard();
+    gameboard = new GameBoard();
   });
 
   test('board should have the correct size', () => {
@@ -34,7 +34,7 @@ describe('when Gameboard is created', () => {
     expect(gameboard.board[0][0 + (anotherShip.length - 1)].ship).not.toBeNull();
   });
 
-  test.only('it should allow ships to be placed vertically', () => {
+  test('it should allow ships to be placed vertically', () => {
     const ship = new Ship(3);
     gameboard.placeShip(ship, 5, 5, 'VERTICAL');
 

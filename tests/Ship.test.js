@@ -1,5 +1,5 @@
 import { test, expect, describe } from '@jest/globals';
-import Ship from '../src/models/Ship';
+import Ship from '../src/models/Ship.js';
 
 describe('when Ship is created', () => {
   test('it returns the correct length and hit count', () => {
