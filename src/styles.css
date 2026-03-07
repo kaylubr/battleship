@@ -108,4 +108,10 @@ main {
 
 #status {
   padding: 1rem;
+  font-size: 1.2rem;
+}
+
+.blur {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
 }

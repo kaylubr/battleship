@@ -8,7 +8,7 @@ class GameController {
   #axis = 'HORIZONTAL';
   #currentPlayer = null;
   #currentShip = null;
-  #winner = null;
+  #winner = false;
 
   ROWS = 10;
   COLUMNS = 10;
@@ -82,6 +82,8 @@ class GameController {
       computerCell.dataset.hit = 'miss'
     }
 
+    this.#checkWinner(currentBoard, 'All ships sunk. The seas are yours.');
+
     this.#currentPlayer = this.player;
     currentBoard = this.#currentPlayer.gameboard;
 
@@ -109,9 +111,13 @@ class GameController {
     
       emptyCell = true;
     }
+
+    this.#checkWinner(currentBoard, 'All ships lost. Better luck next deployment, Admiral.');
   }
 
   #handleCellClick({ target }) {
+    if (this.#winner) return;
+
     const status = document.querySelector('#status');
     const shipLength = this.#currentShip.length || 0;
     const currentRow = Number(target.dataset.row);  
@@ -236,6 +242,20 @@ class GameController {
     ];
 
     this.#currentShip = this.#remainingPlayerShips[0];
+  }
+
+  #checkWinner(board, message) {
+    const status = document.querySelector('#status');
+    if (board.checkIfAllShipsAreSunk()) {
+      const leftBoard = document.querySelector('.board-left');
+      const rightBoard = document.querySelector('.board-right');
+
+      leftBoard.classList.toggle('blur');
+      rightBoard.classList.toggle('blur');
+
+      status.textContent = message;
+      this.#winner = true;
+    }
   }
 
   #toggleAxis({ key }) {
