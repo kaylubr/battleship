@@ -47,7 +47,7 @@ main {
   justify-content: center;
   flex-wrap: wrap-reverse;
   gap: 5rem;
-  margin: 5vh 1.3rem;
+  margin: 4vh 1.3rem;
 }
 
 .board-container h2 {
@@ -72,7 +72,16 @@ main {
 
 .button-container {
   display: flex;
+}
+
+.status-container {
+  display: none;
+}
+
+.button-container,
+.status-container {
   justify-content: center;
+  align-content: center;
 }
 
 #start-button {
@@ -89,4 +98,9 @@ main {
 
 #start-button:hover {
   background-color: #dcdcdc;
+}
+
+#status {
+  padding: 1rem;
+  width: 40%;
 }
